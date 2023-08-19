@@ -63,8 +63,13 @@ typedef NS_ENUM(NSInteger, ImagePickerClassType) { UIImagePickerClassType, PHPic
     [self.imagePickerControllerOverrides removeObjectAtIndex:0];
     return controller;
   }
+   UIImagePickerController *pickerController = [[UIImagePickerController alloc] init];
 
-  return [[UIImagePickerController alloc] init];
+  if (@available(iOS 11.0, *)) {
+    pickerController.videoExportPreset = AVAssetExportPresetHighestQuality;
+  }
+
+  return pickerController;
 }
 
 - (void)setImagePickerControllerOverrides:
